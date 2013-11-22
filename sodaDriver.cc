@@ -60,5 +60,5 @@ void uMain::main() {
 
 
     // final output
-	cout << "Workshop closed" << endl;
+	cout << "*************************" << endl;
 } // uMain::main
