@@ -3,11 +3,11 @@
 
 #include "MPRNG.h"
 #include "config.h"
+#include "printer.h"
 // #include "bank.h"
 // #include "bottlingPlant.h"
 // #include "nameServer.h"
 // #include "parent.h"
-// #include "printer.h"
 // #include "student.h"
 // #include "truck.h"
 // #include "watcard.h"
@@ -69,7 +69,9 @@ void uMain::main() {
         printParams(configs); 
     #endif
 
-	// create printer, bank, parent, WATCard Office, name server, vending machines, 
+    Printer prt( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
+
+	// create bank, parent, WATCard Office, name server, vending machines, 
 	// bottling plant, students
 	// Printer printer();
 
@@ -79,6 +81,4 @@ void uMain::main() {
 		// delete bottling plant before vending machines
 
 
-    // final output
-	cout << "*************************" << endl;
 } // uMain::main

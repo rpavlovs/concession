@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 #include "printer.h"
@@ -12,12 +11,24 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
 				states[INDEX(Printer::Student)]( new State[numStudents] ),
 				states[INDEX(Printer::Vending)]( new State[numVendingMachines] ),
 				states[INDEX(Printer::Courier)]( new State[numCouriers] ) {
-
+	cout << "Parent\tWATOff\tNames\tTruck\tPlant";
+	unsigned int lid, i;
+	for (lid = 0; lid < numStudents; ++i)
+		cout << "\tStud" << i;
+	for (lid = 0; lid < numVendingMachines; ++i)
+		cout << "\tMach" << i;
+	for (lid = 0; lid < numCouriers; ++i)
+		cout << "\tCour" << i;
+	cout << "\n*******"
+	for ( i = 1; i < 5 + numStudents + numVendingMachines + numCouriers; i++ )
+		cout << "\t*******";
+	cout << endl;
 }
 
 Printer::~Printer() {
 	for (int i = 0; i < 3; ++i)
 		delete[] states[i];
+	cout << "***********************" << endl;
 }
 
 void
