@@ -3,23 +3,20 @@ using namespace std;
 
 #include "printer.h"
 
+#define WITH_DOTS true
 
 Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, unsigned int numCouriers ) :
-				num[INDEX(Printer::Student)]( numStudents ),
-				num[INDEX(Printer::Vending)]( numVendingMachines ),
-				num[INDEX(Printer::Courier)]( numCouriers ),
-				states[INDEX(Printer::Student)]( new State[numStudents] ),
-				states[INDEX(Printer::Vending)]( new State[numVendingMachines] ),
-				states[INDEX(Printer::Courier)]( new State[numCouriers] ) {
-	cout << "Parent\tWATOff\tNames\tTruck\tPlant";
+				num( {numStudents, numVendingMachines, numCouriers} ),
+				lidStates( {new State[numStudents], new State[numVendingMachines], new State[numCouriers]} ) {
 	unsigned int lid, i;
+	cout << "Parent\tWATOff\tNames\tTruck\tPlant";
 	for (lid = 0; lid < numStudents; ++i)
 		cout << "\tStud" << i;
 	for (lid = 0; lid < numVendingMachines; ++i)
 		cout << "\tMach" << i;
 	for (lid = 0; lid < numCouriers; ++i)
 		cout << "\tCour" << i;
-	cout << "\n*******"
+	cout << "\n*******";
 	for ( i = 1; i < 5 + numStudents + numVendingMachines + numCouriers; i++ )
 		cout << "\t*******";
 	cout << endl;
@@ -27,7 +24,7 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
 
 Printer::~Printer() {
 	for (int i = 0; i < 3; ++i)
-		delete[] states[i];
+		delete[] lidStates[i];
 	cout << "***********************" << endl;
 }
 
@@ -45,7 +42,7 @@ Printer::State::print( bool withDots ) {
 }
 
 void
-Printer::State::operator()( char s ) {
+Printer::State::set( char s ) {
 	isWritten = true;
 	state = s;
 	intOne = -1;
@@ -53,7 +50,7 @@ Printer::State::operator()( char s ) {
 }
 
 void
-Printer::State::operator()( char s, int i1 ) {
+Printer::State::set( char s, int i1 ) {
 	isWritten = true;
 	state = s;
 	intOne = i1;
@@ -61,7 +58,7 @@ Printer::State::operator()( char s, int i1 ) {
 }
 
 void
-Printer::State::operator()( char s, int i1, int i2 ) {
+Printer::State::set( char s, int i1, int i2 ) {
 	isWritten = true;
 	state = s;
 	intOne = i1;
@@ -72,11 +69,11 @@ bool
 Printer::isRowBufEmpty() {
 	unsigned int i, uidObj;
 	for (i = 0; i < 5; ++i) {
-		if ( state[i].isWritten ) return false;
+		if ( nonlidStates[i].isWritten ) return false;
 	}
 	for (uidObj = 0; uidObj < 3; ++uidObj) {
-		for ( i = 0; i < numStudents; ++i ) {
-			if ( states[uidObj][i].isWritten ) return false;
+		for ( i = 0; i < num[INDEX(uidObj)]; ++i ) {
+			if ( lidStates[uidObj][i].isWritten ) return false;
 		}
 	}
 	return true;
@@ -89,52 +86,58 @@ Printer::flush( bool withDots ) {
 
 	i = 0;
 	for (;;) {
-		state[i].print( withDots );
+		nonlidStates[i].print( withDots );
 		if ( ++i == 5 ) break;
 		cout << "\t";
 	}
 	for ( uidObj = 0; uidObj < 3; ++uidObj ) {
 		for ( uid = 0; uid < num[uidObj]; ++uid ) {
 			cout << "\t";
-			states[uidObj][uid].print( withDots );		
+			lidStates[uidObj][uid].print( withDots );		
 		}
 	}
 	cout << endl;
 }
 
-void print( Kind kind, char state ) {
-	if ( state[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	state[kind]( state );
+void 
+Printer::print( Kind kind, char state ) {
+	if ( nonlidStates[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	nonlidStates[kind].set( state );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
-void print( Kind kind, char state, int value1 ) {
-	if ( state[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	state[kind]( state, value1 );
+void 
+Printer::print( Kind kind, char state, int value1 ) {
+	if ( nonlidStates[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	nonlidStates[kind].set( state, value1 );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
-void print( Kind kind, char state, int value1, int value2 ) {
-	if ( state[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	state[kind]( state, value1, value2 );
+void 
+Printer::print( Kind kind, char state, int value1, int value2 ) {
+	if ( nonlidStates[kind].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	nonlidStates[kind].set( state, value1, value2 );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
-void print( Kind kind, unsigned int lid, char state ) {
-	if ( states[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	states[INDEX(kind)][lid]( state );
+void 
+Printer::print( Kind kind, unsigned int lid, char state ) {
+	if ( lidStates[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	lidStates[INDEX(kind)][lid].set( state );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
-void print( Kind kind, unsigned int lid, char state, int value1 ) {
-	if ( states[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	states[INDEX(kind)][lid]( state, value1 );
+void 
+Printer::print( Kind kind, unsigned int lid, char state, int value1 ) {
+	if ( lidStates[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	lidStates[INDEX(kind)][lid].set( state, value1 );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
-void print( Kind kind, unsigned int lid, char state, int value1, int value2 ) {
-	if ( states[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
-	states[INDEX(kind)][lid]( state, value1, value2 );
+void 
+Printer::print( Kind kind, unsigned int lid, char state, int value1, int value2 ) {
+	if ( lidStates[INDEX(kind)][lid].isWritten || state == 'F' ) flush( ! WITH_DOTS );
+	lidStates[INDEX(kind)][lid].set( state, value1, value2 );
 	if ( state == 'F' ) flush( WITH_DOTS );
 }
 
