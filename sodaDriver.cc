@@ -1,23 +1,36 @@
 #include <uC++.h>
-
 #include <iostream>
 
-#include "bank.h"
-#include "bottlingPlant.h"
-#include "config.h"
-#include "nameServer.h"
-#include "parent.h"
-#include "printer.h"
-#include "student.h"
-#include "truck.h"
-#include "watcard.h"
-#include "watcardOffice.h"
 #include "MPRNG.h"
+#include "config.h"
+// #include "bank.h"
+// #include "bottlingPlant.h"
+// #include "nameServer.h"
+// #include "parent.h"
+// #include "printer.h"
+// #include "student.h"
+// #include "truck.h"
+// #include "watcard.h"
+// #include "watcardOffice.h"
 
 using namespace std;
 
 void usage() {
     cout << "Usage: soda [config-file] [seed > 0]" << endl;
+}
+
+// #define DEBUG
+
+void printParams(ConfigParms &cparms) {
+    cout << "sodaCost = \t\t" << cparms.sodaCost << endl;
+    cout << "numStudents = \t\t" << cparms.numStudents << endl;
+    cout << "maxPurchases = \t\t" << cparms.maxPurchases << endl;
+    cout << "numVendingMachines = \t" << cparms.numVendingMachines << endl;
+    cout << "maxStockPerFlavour = \t" << cparms.maxStockPerFlavour << endl;
+    cout << "maxShippedPerFlavour = \t" << cparms.maxShippedPerFlavour << endl;
+    cout << "timeBetweenShipments = \t" << cparms.timeBetweenShipments << endl;
+    cout << "parentalDelay = \t" << cparms.parentalDelay << endl;
+    cout << "numCouriers = \t\t" << cparms.numCouriers << endl;
 }
 
 MPRNG randGen;
@@ -48,6 +61,13 @@ void uMain::main() {
 
     // set up
 	randGen.seed(seed);
+
+    ConfigParms configs;
+
+    processConfigFile(configFile, configs);
+    #ifdef DEBUG 
+        printParams(configs); 
+    #endif
 
 	// create printer, bank, parent, WATCard Office, name server, vending machines, 
 	// bottling plant, students
