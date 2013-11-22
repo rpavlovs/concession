@@ -36,13 +36,29 @@ void printParams( ConfigParms &cparms ) {
 
 void printHeader( ConfigParms &cparms ) {
 
-    for(int id = 0; id < configs.numStudents; id += 1) {
+    unsigned int count = 5;
+    cout << "Parent\tWATOff\tNames\tTruck\tPlant\t";
+
+    for(unsigned int id = 0; id < cparms.numStudents; id += 1) {
         cout << "Stud" << id << '\t';
+        count += 1;
     }
 
-    for(int id = 0; id < configs.numVendingMachines; id += 1) {
+    for(unsigned int id = 0; id < cparms.numVendingMachines; id += 1) {
         cout << "Mach" << id << '\t';
+        count += 1;
     }
+
+    for(unsigned int id = 0; id < cparms.numCouriers; id += 1) {
+        cout << "Cour" << id << '\t';
+        count += 1;
+    }
+    cout << endl;
+
+    for (unsigned int i = 0; i < count; i += 1) {
+        cout << "*******\t";
+    }
+    cout << endl;
 }
 
 MPRNG randGen;
@@ -74,8 +90,8 @@ void uMain::main() {
     // set up
 	randGen.seed( seed );
 
-    vector<VendingMachine*> VMList;
-    vector<Student*> studentList;
+    // vector<VendingMachine*> VMList;
+    // vector<Student*> studentList;
 
     // read in configs
     ConfigParms configs;
@@ -87,46 +103,46 @@ void uMain::main() {
         #endif
 
 	// create printer, bank, parent, WATCard Office, name server
-	Printer printer( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
-  //   Bank bank( configs.numStudents );
-  //   Parent *parent = new Parent( printer, bank, configs.numStudents, configs.parentalDelay );
-  //   WATCardOffice *office = new WATCardOffice( printer, bank, configs.numCouriers );
-  //   NameServer *server = new NameServer( printer, configs.numVendingMachines, confrigs.numStudents );
+    Printer printer( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
+ //    Bank bank( configs.numStudents );
+ //    Parent *parent = new Parent( printer, bank, configs.numStudents, configs.parentalDelay );
+ //    WATCardOffice *office = new WATCardOffice( printer, bank, configs.numCouriers );
+ //    NameServer *server = new NameServer( printer, configs.numVendingMachines, confrigs.numStudents );
 
-  //   // create vending machines
-  //   for(int id = 0; id < configs.numVendingMachines; id += 1) {
-  //       VMList.push_back( 
-  //           new VendingMachine( printer, *server, id, configs.sodaCost, configs.maxStockPerFlavour )
-  //       );
-  //   }
+ //    // create vending machines
+ //    for(unsigned int id = 0; id < configs.numVendingMachines; id += 1) {
+ //        VMList.push_back( 
+ //            new VendingMachine( printer, *server, id, configs.sodaCost, configs.maxStockPerFlavour )
+ //        );
+ //    }
 
-  //   // create bottling plant
-  //   BottlingPlant *plant = new BottlingPlant( printer, *server, configs.numVendingMachines, 
-  //           configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
+ //    // create bottling plant
+ //    BottlingPlant *plant = new BottlingPlant( printer, *server, configs.numVendingMachines, 
+ //            configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
-  //   // create students
-  //   for(int id = 0; id < configs.numStudents; id += 1) {
-  //       studentList.push_back( new Student( printer, *server, *office, id, configs.maxPurchases ) );
-  //   }
+ //    // create students
+ //    for(unsigned int id = 0; id < configs.numStudents; id += 1) {
+ //        studentList.push_back( new Student( printer, *server, *office, id, configs.maxPurchases ) );
+ //    }
 
-  //   // do stuff
+ //    // do stuff
     
-  //   // clean up memory
-		// // delete bottling plant before vending machines
+ //    // clean up memory
+	// 	// delete bottling plant before vending machines
 
-  //   for(unsigned int i = 0; i < configs.numStudents; i += 1) {
-  //       delete studentList[i];
-  //   }
+ //    for(unsigned int i = 0; i < configs.numStudents; i += 1) {
+ //        delete studentList[i];
+ //    }
 
-  //   delete plant;
+ //    delete plant;
     
-  //   for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
-  //       delete VMList[i];
-  //   }
+ //    for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
+ //        delete VMList[i];
+ //    }
 
-  //   delete server;
-  //   delete office;
-  //   delete parent;
+ //    delete server;
+ //    delete office;
+ //    delete parent;
 
     // final output
 	cout << "*************************" << endl;
