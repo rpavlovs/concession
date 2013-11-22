@@ -4,11 +4,11 @@
 
 #include "MPRNG.h"
 #include "config.h"
+#include "printer.h"
 // #include "bank.h"
 // #include "bottlingPlant.h"
 // #include "nameServer.h"
 // #include "parent.h"
-// #include "printer.h"
 // #include "student.h"
 // #include "truck.h"
 // #include "watcard.h"
@@ -88,45 +88,45 @@ void uMain::main() {
 
 	// create printer, bank, parent, WATCard Office, name server
 	Printer printer( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
-    Bank bank( configs.numStudents );
-    Parent *parent = new Parent( printer, bank, configs.numStudents, configs.parentalDelay );
-    WATCardOffice *office = new WATCardOffice( printer, bank, configs.numCouriers );
-    NameServer *server = new NameServer( printer, configs.numVendingMachines, confrigs.numStudents );
+  //   Bank bank( configs.numStudents );
+  //   Parent *parent = new Parent( printer, bank, configs.numStudents, configs.parentalDelay );
+  //   WATCardOffice *office = new WATCardOffice( printer, bank, configs.numCouriers );
+  //   NameServer *server = new NameServer( printer, configs.numVendingMachines, confrigs.numStudents );
 
-    // create vending machines
-    for(int id = 0; id < configs.numVendingMachines; id += 1) {
-        VMList.push_back( 
-            new VendingMachine( printer, *server, id, configs.sodaCost, configs.maxStockPerFlavour )
-        );
-    }
+  //   // create vending machines
+  //   for(int id = 0; id < configs.numVendingMachines; id += 1) {
+  //       VMList.push_back( 
+  //           new VendingMachine( printer, *server, id, configs.sodaCost, configs.maxStockPerFlavour )
+  //       );
+  //   }
 
-    // create bottling plant
-    BottlingPlant *plant = new BottlingPlant( printer, *server, configs.numVendingMachines, 
-            configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
+  //   // create bottling plant
+  //   BottlingPlant *plant = new BottlingPlant( printer, *server, configs.numVendingMachines, 
+  //           configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
-    // create students
-    for(int id = 0; id < configs.numStudents; id += 1) {
-        studentList.push_back( new Student( printer, *server, *office, id, configs.maxPurchases ) );
-    }
+  //   // create students
+  //   for(int id = 0; id < configs.numStudents; id += 1) {
+  //       studentList.push_back( new Student( printer, *server, *office, id, configs.maxPurchases ) );
+  //   }
 
-    // do stuff
+  //   // do stuff
     
-    // clean up memory
-		// delete bottling plant before vending machines
+  //   // clean up memory
+		// // delete bottling plant before vending machines
 
-    for(unsigned int i = 0; i < configs.numStudents; i += 1) {
-        delete studentList[i];
-    }
+  //   for(unsigned int i = 0; i < configs.numStudents; i += 1) {
+  //       delete studentList[i];
+  //   }
 
-    delete plant;
+  //   delete plant;
     
-    for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
-        delete VMList[i];
-    }
+  //   for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
+  //       delete VMList[i];
+  //   }
 
-    delete server;
-    delete office;
-    delete parent;
+  //   delete server;
+  //   delete office;
+  //   delete parent;
 
     // final output
 	cout << "*************************" << endl;
