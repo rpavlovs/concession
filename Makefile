@@ -2,8 +2,8 @@ CXX = u++						# compiler
 CXXFLAGS = -g -multi -Wall -Wno-unused-label -MMD ${OPT} # compiler flags
 MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
 
-OBJECTS1 = q2Printer.o q2Workshop.o q2Santa.o q2Reindeer.o q2Elf.o q2Driver.o
-EXEC1 = northpole
+OBJECTS1 = config.o sodaDriver.o
+EXEC1 = soda
 
 OBJECTS = ${OBJECTS1}					# all object files
 DEPENDS = ${OBJECTS:.o=.d}				# substitute ".o" with ".d"
