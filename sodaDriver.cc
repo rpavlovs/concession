@@ -34,33 +34,6 @@ void printParams( ConfigParms &cparms ) {
     cout << "numCouriers = \t\t" << cparms.numCouriers << endl;
 }
 
-void printHeader( ConfigParms &cparms ) {
-
-    unsigned int count = 5;
-    cout << "Parent\tWATOff\tNames\tTruck\tPlant\t";
-
-    for(unsigned int id = 0; id < cparms.numStudents; id += 1) {
-        cout << "Stud" << id << '\t';
-        count += 1;
-    }
-
-    for(unsigned int id = 0; id < cparms.numVendingMachines; id += 1) {
-        cout << "Mach" << id << '\t';
-        count += 1;
-    }
-
-    for(unsigned int id = 0; id < cparms.numCouriers; id += 1) {
-        cout << "Cour" << id << '\t';
-        count += 1;
-    }
-    cout << endl;
-
-    for (unsigned int i = 0; i < count; i += 1) {
-        cout << "*******\t";
-    }
-    cout << endl;
-}
-
 MPRNG randGen;
 
 void uMain::main() {
@@ -96,14 +69,29 @@ void uMain::main() {
     // read in configs
     ConfigParms configs;
     processConfigFile( configFile, configs );
-    printHeader(configs);
 
         #ifdef DEBUG 
             printParams( configs ); 
         #endif
 
 	// create printer, bank, parent, WATCard Office, name server
-    Printer printer( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
+    Printer prt( configs.numStudents, configs.numVendingMachines, configs.numCouriers );
+
+    prt.print( Printer::Parent, 'S' );
+    prt.print( Printer::NameServer, 'S' );
+    prt.print( Printer::NameServer, 'R', 0 );
+    prt.print( Printer::Student, 1, 'S', 0, 3 );
+    prt.print( Printer::NameServer, 'N', 0, 0 );
+    prt.print( Printer::NameServer, 'F' );
+
+    prt.print( Printer::Student, 1, 'V', 1 );
+    prt.print( Printer::Student, 1, 'F' );
+    prt.print( Printer::BottlingPlant, 'F' );
+
+
+
+
+
  //    Bank bank( configs.numStudents );
  //    Parent *parent = new Parent( printer, bank, configs.numStudents, configs.parentalDelay );
  //    WATCardOffice *office = new WATCardOffice( printer, bank, configs.numCouriers );
