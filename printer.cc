@@ -10,12 +10,12 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
 				lidStates( {new State[numStudents], new State[numVendingMachines], new State[numCouriers]} ) {
 	unsigned int lid, i;
 	cout << "Parent\tWATOff\tNames\tTruck\tPlant";
-	for (lid = 0; lid < numStudents; ++i)
-		cout << "\tStud" << i;
-	for (lid = 0; lid < numVendingMachines; ++i)
-		cout << "\tMach" << i;
-	for (lid = 0; lid < numCouriers; ++i)
-		cout << "\tCour" << i;
+	for (lid = 0; lid < numStudents; ++lid)
+		cout << "\tStud" << lid;
+	for (lid = 0; lid < numVendingMachines; ++lid)
+		cout << "\tMach" << lid;
+	for (lid = 0; lid < numCouriers; ++lid)
+		cout << "\tCour" << lid;
 	cout << "\n*******";
 	for ( i = 1; i < 5 + numStudents + numVendingMachines + numCouriers; i++ )
 		cout << "\t*******";
@@ -23,6 +23,7 @@ Printer::Printer( unsigned int numStudents, unsigned int numVendingMachines, uns
 }
 
 Printer::~Printer() {
+	flush( ! WITH_DOTS );
 	for (int i = 0; i < 3; ++i)
 		delete[] lidStates[i];
 	cout << "***********************" << endl;
@@ -72,7 +73,7 @@ Printer::isRowBufEmpty() {
 		if ( nonlidStates[i].isWritten ) return false;
 	}
 	for (uidObj = 0; uidObj < 3; ++uidObj) {
-		for ( i = 0; i < num[INDEX(uidObj)]; ++i ) {
+		for ( i = 0; i < num[uidObj]; ++i ) {
 			if ( lidStates[uidObj][i].isWritten ) return false;
 		}
 	}
