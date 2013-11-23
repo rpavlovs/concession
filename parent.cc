@@ -1,29 +1,27 @@
 #include "parent.h"
 
-using namespace std;
-
 Parent::Parent( Printer &prt, Bank &bank, unsigned int numStudents, unsigned int parentalDelay ) :
-				printer(prt),
-				bank(bank),
+				prt(&prt),
+				bank(&bank),
 				numStudents(numStudents),
 				parentalDelay(parentalDelay) {	
-
 }
 
-Parent::~Parent() {}
-
 void Parent::main() {
+	prt->print( Printer::Parent, 'S' );
+
 	for (;;) {
 		_Accept( ~Parent ) {
 			break;
 		}
 		_Else {
-			unsigned int amount = randGen(1,3);
-			unsigned int studentId = randGen(numStudents-1);
+			int amount = randGen(1,3);
+			unsigned int studentId = randGen( numStudents - 1 );
 
-			yield(parentalDelay);
+			yield( parentalDelay );
 
-			bank.deposit(studentId, amount);
+			prt->print( Printer::Parent, 'D', studentId, amount);
+			bank->deposit( studentId, amount );
 		}
 	}
 }
