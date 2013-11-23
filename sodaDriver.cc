@@ -7,8 +7,9 @@
 #include "printer.h"
 #include "bank.h"
 #include "parent.h"
+#include "nameServer.h"
+#include "vendingMachine.h"
 // #include "bottlingPlant.h"
-// #include "nameServer.h"
 // #include "student.h"
 // #include "truck.h"
 // #include "watcard.h"
@@ -61,7 +62,7 @@ void uMain::main() {
     // set up
 	randGen.seed( seed );
 
-    // vector<VendingMachine*> VMList;
+    vector<VendingMachine*> VMList;
     // vector<Student*> studentList;
 
     // read in configs
@@ -73,30 +74,15 @@ void uMain::main() {
     Bank bank( configs.numStudents );
     Parent *parent = new Parent( prt, bank, configs.numStudents, configs.parentalDelay );
 
-
-    prt.print( Printer::NameServer, 'S' );
-    prt.print( Printer::NameServer, 'R', 0 );
-    prt.print( Printer::Student, 1, 'S', 0, 3 );
-    prt.print( Printer::NameServer, 'N', 0, 0 );
-    prt.print( Printer::NameServer, 'F' );
-
-    prt.print( Printer::Student, 1, 'V', 1 );
-    prt.print( Printer::Student, 1, 'F' );
-    prt.print( Printer::BottlingPlant, 'F' );
-
-
-    bank.withdraw(0, 5);
-    bank.withdraw(1, 8);
-
  //    WATCardOffice *office = new WATCardOffice( prt, bank, configs.numCouriers );
- //    NameServer *server = new NameServer( prt, configs.numVendingMachines, confrigs.numStudents );
+    NameServer server( prt, configs.numVendingMachines, configs.numStudents );
 
- //    // create vending machines
- //    for(unsigned int id = 0; id < configs.numVendingMachines; id += 1) {
- //        VMList.push_back( 
- //            new VendingMachine( prt, *server, id, configs.sodaCost, configs.maxStockPerFlavour )
- //        );
- //    }
+    // create vending machines
+    for(unsigned int id = 0; id < configs.numVendingMachines; id += 1) {
+        VMList.push_back( 
+            new VendingMachine( prt, server, id, configs.sodaCost, configs.maxStockPerFlavour )
+        );
+    }
 
  //    // create bottling plant
  //    BottlingPlant *plant = new BottlingPlant( prt, *server, configs.numVendingMachines, 
@@ -118,12 +104,30 @@ void uMain::main() {
 
  //    delete plant;
     
- //    for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
- //        delete VMList[i];
- //    }
+    for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
+        delete VMList[i];
+    }
 
- //    delete server;
  //    delete office;
     delete parent;
 
 } // uMain::main
+
+
+
+
+
+
+    // prt.print( Printer::NameServer, 'S' );
+    // prt.print( Printer::NameServer, 'R', 0 );
+    // prt.print( Printer::Student, 1, 'S', 0, 3 );
+    // prt.print( Printer::NameServer, 'N', 0, 0 );
+    // prt.print( Printer::NameServer, 'F' );
+
+    // prt.print( Printer::Student, 1, 'V', 1 );
+    // prt.print( Printer::Student, 1, 'F' );
+    // prt.print( Printer::BottlingPlant, 'F' );
+
+
+    // bank.withdraw(0, 5);
+    // bank.withdraw(1, 8);

@@ -7,6 +7,10 @@ Parent::Parent( Printer &prt, Bank &bank, unsigned int numStudents, unsigned int
 				parentalDelay(parentalDelay) {	
 }
 
+Parent::~Parent() {
+	prt->print( Printer::Parent, 'D' );
+}
+
 void Parent::main() {
 	prt->print( Printer::Parent, 'S' );
 
