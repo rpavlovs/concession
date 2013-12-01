@@ -2,7 +2,7 @@ CXX = u++						# compiler
 CXXFLAGS = -g -multi -Wall -Wno-unused-label -MMD ${OPT} # compiler flags
 MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
 
-OBJECTS1 = config.o printer.o bank.o parent.o nameServer.o vendingMachine.o sodaDriver.o
+OBJECTS1 = config.o printer.o bank.o parent.o nameServer.o vendingMachine.o watcard.o truck.o bottlingPlant.o sodaDriver.o
 EXEC1 = soda
 
 OBJECTS = ${OBJECTS1}					# all object files

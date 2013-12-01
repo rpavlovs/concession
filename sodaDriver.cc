@@ -9,10 +9,8 @@
 #include "parent.h"
 #include "nameServer.h"
 #include "vendingMachine.h"
-// #include "bottlingPlant.h"
+#include "bottlingPlant.h"
 // #include "student.h"
-// #include "truck.h"
-// #include "watcard.h"
 // #include "watcardOffice.h"
 
 using namespace std;
@@ -84,9 +82,9 @@ void uMain::main() {
         );
     }
 
- //    // create bottling plant
- //    BottlingPlant *plant = new BottlingPlant( prt, *server, configs.numVendingMachines, 
- //            configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
+    // create bottling plant
+    BottlingPlant *plant = new BottlingPlant( prt, *server, configs.numVendingMachines, 
+            configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
  //    // create students
  //    for(unsigned int id = 0; id < configs.numStudents; id += 1) {
@@ -102,7 +100,7 @@ void uMain::main() {
  //        delete studentList[i];
  //    }
 
- //    delete plant;
+    delete plant;
     
     for(unsigned int i = 0; i < configs.numVendingMachines; i += 1) {
         delete VMList[i];
