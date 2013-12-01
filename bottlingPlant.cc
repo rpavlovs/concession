@@ -14,7 +14,13 @@ BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int
 	for(int i = 0; i < 4; i += 1) {
 		inventory[i] += 0;
 	}
+	prt.print( Printer::BottlingPlant, 'S' );
 
+	truck = new Truck( prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
+}
+
+BottlingPlant::~BottlingPlant() {
+	delete truck;
 }
 
 void BottlingPlant::main() {
@@ -30,18 +36,25 @@ void BottlingPlant::main() {
 			_Accept( getShipment );
 		}
 	}
+	prt->print( Printer::BottlingPlant, 'F' );
 }
 
 void BottlingPlant::produceSoda() {
 	yield( timeBetweenShipments );
+	unsigned int totalBottles = 0;
 
 	for(int i = 0; i < 4; i += 1) {
-		inventory[i] += randGen( maxShipped );
+		unsigned int bottles = randGen( maxShipped );
+		inventory[i] += bottles;
+		totalBottles += bottles;
 	}
+	prt->print( Printer::BottlingPlant, 'G', totalBottles );
 }
 
 bool BottlingPlant::getShipment( unsigned int cargo[] ) {
 	if ( closingDown ) { return true; }
+
+	prt->print( Printer::BottlingPlant, 'P' );
 
 	std::copy( inventory, inventory + 4, cargo );
 	return false;

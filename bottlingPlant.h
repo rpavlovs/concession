@@ -7,9 +7,13 @@
 
 extern MPRNG randGen;
 
+_Task Truck;
+
 _Task BottlingPlant {
 	Printer *prt;
 	NameServer *nameServer;
+	Truck *truck;
+
 	unsigned int numVMs;
 	unsigned int maxShipped;
 	unsigned int maxStock;
@@ -23,6 +27,7 @@ _Task BottlingPlant {
     BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int numVendingMachines,
                  unsigned int maxShippedPerFlavour, unsigned int maxStockPerFlavour,
                  unsigned int timeBetweenShipments );
+    ~BottlingPlant();
     bool getShipment( unsigned int cargo[] );
 };
 
