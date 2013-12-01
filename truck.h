@@ -18,9 +18,9 @@ _Task Truck {
 	unsigned int deliveryStock[4];
 	VendingMachine **VMs;
 
+    void restock( int stockRemaining );
+    unsigned int countInventory( unsigned int * inventoryList );
     void main();
-    void restock();
-
   public:
     Truck( Printer &prt, NameServer &nameServer, BottlingPlant &plant,
            unsigned int numVendingMachines, unsigned int maxStockPerFlavour );

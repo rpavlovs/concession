@@ -83,7 +83,7 @@ void uMain::main() {
     }
 
     // create bottling plant
-    BottlingPlant *plant = new BottlingPlant( prt, *server, configs.numVendingMachines, 
+    BottlingPlant *plant = new BottlingPlant( prt, server, configs.numVendingMachines, 
             configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
  //    // create students
