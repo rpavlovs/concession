@@ -23,8 +23,7 @@ Student::~Student() {
 
 void
 Student::main() {
-	VendingMachine::Status st = VendingMachine::STOCK;
-	
+	VendingMachine::Status st;
 	while ( numPurchases != 0 ) {
 		yield( rnd(1,10) );
 		while(1) {
