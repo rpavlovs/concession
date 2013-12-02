@@ -11,8 +11,7 @@ _Task Student {
 	NameServer *nameServer;
 	WATCardOffice *cardOffice;
 	WATCard::FWATCard fwatcard;
-	WATCard watcard;
-	int id, maxPurchases, numPurchases;
+	int id, numPurchases;
 	VendingMachine *machine;
 	VendingMachine::Flavours favFlavour;
     void main();
