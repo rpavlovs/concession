@@ -12,7 +12,7 @@ BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int
     closingDown = false;
 
 	for(int i = 0; i < 4; i += 1) {
-		inventory[i] += 0;
+		inventory[i] = 0;
 	}
 	prt.print( Printer::BottlingPlant, 'S' );
 

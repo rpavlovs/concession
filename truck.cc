@@ -1,5 +1,6 @@
 #include "truck.h"
 
+
 Truck::Truck( Printer &prt, NameServer &nameServer, BottlingPlant &plant,
            unsigned int numVendingMachines, unsigned int maxStockPerFlavour ) :
            prt(&prt), nameServer(&nameServer), plant(&plant), numVMs(numVendingMachines), 
@@ -31,7 +32,7 @@ void Truck::main() {
 void Truck::restock( int stockRemaining ) {
 	unsigned int maxInventory = maxStock * 4;
 
-	for(unsigned int i = 0; i < numVMs; i += 1) {
+	for(unsigned int i = 0; i < numVMs && stockRemaining > 0; i += 1) {
 		// begin delivery to vending machine
 		prt->print( Printer::Truck, 'd', VMs[i]->getId(), stockRemaining );
 		
