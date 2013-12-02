@@ -14,7 +14,6 @@ Student::Student( Printer &prt, NameServer &nameServer, WATCardOffice &cardOffic
 }
 
 Student::~Student() {
-	prt->print( Printer::Student, id, 'F' );
 	delete fwatcard;
 }
 
@@ -42,4 +41,5 @@ Student::main() {
 		prt->print( Printer::Student, id, 'B', fwatcard()->getBalance() );
 		numPurchases--;
 	}
+	prt->print( Printer::Student, id, 'F' );
 }
