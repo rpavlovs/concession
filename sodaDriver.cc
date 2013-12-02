@@ -10,8 +10,8 @@
 #include "nameServer.h"
 #include "vendingMachine.h"
 #include "bottlingPlant.h"
-// #include "student.h"
-// #include "watcardOffice.h"
+#include "student.h"
+#include "watcardOffice.h"
 
 using namespace std;
 
@@ -61,7 +61,7 @@ void uMain::main() {
 	randGen.seed( seed );
 
     vector<VendingMachine*> VMList;
-    // vector<Student*> studentList;
+    vector<Student*> studentList;
 
     // read in configs
     ConfigParms configs;
@@ -72,7 +72,7 @@ void uMain::main() {
     Bank bank( configs.numStudents );
     Parent *parent = new Parent( prt, bank, configs.numStudents, configs.parentalDelay );
 
- //    WATCardOffice *office = new WATCardOffice( prt, bank, configs.numCouriers );
+    WATCardOffice office( prt, bank, configs.numCouriers );
     NameServer server( prt, configs.numVendingMachines, configs.numStudents );
 
     // create vending machines
@@ -86,19 +86,19 @@ void uMain::main() {
     BottlingPlant *plant = new BottlingPlant( prt, server, configs.numVendingMachines, 
             configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
- //    // create students
- //    for(unsigned int id = 0; id < configs.numStudents; id += 1) {
- //        studentList.push_back( new Student( prt, *server, *office, id, configs.maxPurchases ) );
- //    }
+    // create students
+    for(unsigned int id = 0; id < configs.numStudents; id += 1) {
+        studentList.push_back( new Student( prt, server, office, id, configs.maxPurchases ) );
+    }
 
- //    // do stuff
+    // do stuff
     
- //    // clean up memory
-	// 	// delete bottling plant before vending machines
+    // clean up memory
+		// delete bottling plant before vending machines
 
- //    for(unsigned int i = 0; i < configs.numStudents; i += 1) {
- //        delete studentList[i];
- //    }
+    for(unsigned int i = 0; i < configs.numStudents; i += 1) {
+        delete studentList[i];
+    }
 
     delete plant;
     
@@ -106,7 +106,6 @@ void uMain::main() {
         delete VMList[i];
     }
 
- //    delete office;
     delete parent;
 
 } // uMain::main

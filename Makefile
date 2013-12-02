@@ -1,13 +1,13 @@
 CXX = u++						# compiler
 CXXFLAGS = -g -multi -Wall -Wno-unused-label -MMD ${OPT} # compiler flags
-MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
+MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}		# makefile name
 
-OBJECTS1 = config.o printer.o bank.o parent.o nameServer.o vendingMachine.o truck.o bottlingPlant.o watcard.o watcardOffice.o sodaDriver.o student.o
+OBJECTS1 = config.o printer.o bank.o parent.o nameServer.o vendingMachine.o watcard.o truck.o bottlingPlant.o sodaDriver.o student.o watcardOffice.o
 EXEC1 = soda
 
 OBJECTS = ${OBJECTS1}					# all object files
 DEPENDS = ${OBJECTS:.o=.d}				# substitute ".o" with ".d"
-EXECS = ${EXEC1}						# all executables
+EXECS = ${EXEC1}					# all executables
 
 #############################################################
 
