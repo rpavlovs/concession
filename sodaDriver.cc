@@ -10,8 +10,8 @@
 #include "nameServer.h"
 #include "vendingMachine.h"
 #include "bottlingPlant.h"
+#include "watcardOffice.h"
 // #include "student.h"
-// #include "watcardOffice.h"
 
 using namespace std;
 
@@ -72,7 +72,7 @@ void uMain::main() {
     Bank bank( configs.numStudents );
     Parent *parent = new Parent( prt, bank, configs.numStudents, configs.parentalDelay );
 
- //    WATCardOffice *office = new WATCardOffice( prt, bank, configs.numCouriers );
+    WATCardOffice *office = new WATCardOffice( prt, bank, configs.numCouriers );
     NameServer server( prt, configs.numVendingMachines, configs.numStudents );
 
     // create vending machines
@@ -106,7 +106,7 @@ void uMain::main() {
         delete VMList[i];
     }
 
- //    delete office;
+    delete office;
     delete parent;
 
 } // uMain::main

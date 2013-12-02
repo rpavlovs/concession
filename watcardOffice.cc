@@ -6,12 +6,12 @@
 
 WATCardOffice::WATCardOffice( Printer &prt, Bank &bank, unsigned int numCouriers ) : prt(&prt), bank(&bank),
 				numCouriers(numCouriers) {
-	prt.print( Printer::WATCardOffice, 'S' );
 
 	for(unsigned int id = 0; id < numCouriers; id += 1) {
-		courierList.push_back( new Courier( prt, bank, *this ) );
+		courierList.push_back( new Courier( id, prt, bank, *this ) );
 	}
-
+	closed = false;
+	prt.print( Printer::WATCardOffice, 'S' );
 }
 
 WATCardOffice::~WATCardOffice() {
@@ -32,6 +32,11 @@ WATCardOffice::~WATCardOffice() {
 void WATCardOffice::main() {
 	for (;;) {
 		_Accept( ~WATCardOffice ) {
+			closed = true;
+			// wake up couriers so that they finish
+			for (unsigned int id = 0; id < numCouriers; id += 1) {
+				workAvailable.signal();
+			}
 			break;
 		}
 		or _Accept( requestWork ) {
@@ -59,7 +64,9 @@ WATCard::FWATCard WATCardOffice::transfer( unsigned int sid, unsigned int amount
 
 WATCardOffice::Job * WATCardOffice::requestWork() {
 	if ( jobsList.empty() ) { workAvailable.wait(); }
-
+	if ( closed ) { 
+		return NULL;
+	}
 	return jobsList.front();
 }
 
@@ -69,14 +76,19 @@ WATCardOffice::Job * WATCardOffice::requestWork() {
  * Courier
  */
 
-WATCardOffice::Courier::Courier( Printer &prt, Bank &bank, WATCardOffice &office ) : prt(&prt), bank(&bank),
-					office(&office) {
-
+WATCardOffice::Courier::Courier( unsigned int id, Printer &prt, Bank &bank, WATCardOffice &office ) 
+				: id(id), prt(&prt), bank(&bank), office(&office) {
+	prt.print( Printer::Courier, id, 'S' );
 }
 
 void WATCardOffice::Courier::main() {
 	for (;;) {
 		Job * job = office->requestWork();
+		if ( job == NULL ) { 
+			break; 
+		}
+
+		prt->print( Printer::Courier, id, 't', job->studentId, job->amount );
 
 		bank->withdraw( job->studentId, job->amount );
 
@@ -88,7 +100,9 @@ void WATCardOffice::Courier::main() {
 		}
 
 		job->result.delivery( job->card );
+		prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
 
 		delete job;
 	}
+	prt->print( Printer::Courier, id, 'F' );
 }

@@ -21,12 +21,13 @@ _Task WATCardOffice {
             : studentId(studentId), amount(amount), card(card) {}
     };
     _Task Courier {                         // communicates with bank
+          unsigned int id;
           Printer * prt;
           Bank * bank;
           WATCardOffice * office;
           void main();
         public:
-          Courier( Printer &prt, Bank &bank, WATCardOffice &office );
+          Courier( unsigned int id, Printer &prt, Bank &bank, WATCardOffice &office );
     };
 
     Printer * prt;
@@ -35,6 +36,7 @@ _Task WATCardOffice {
     std::vector<Courier*> courierList;
     std::queue<Job*> jobsList;
     uCondition workAvailable;
+    bool closed;
 
     void main();
   public:
