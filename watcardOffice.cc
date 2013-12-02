@@ -38,7 +38,7 @@ void WATCardOffice::main() {
 //			std::cout << "wake up couriers" << std::endl;
 			// wake up couriers so that they finish
 			for (unsigned int id = 0; id < numCouriers; id += 1) {
-				std::cout << "signal " << id << std::endl;
+//				std::cout << "signal " << id << std::endl;
 				workAvailable.signalBlock();
 			}
 			break;

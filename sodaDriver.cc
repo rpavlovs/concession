@@ -87,22 +87,19 @@ void uMain::main() {
             configs.maxShippedPerFlavour, configs.maxStockPerFlavour, configs.timeBetweenShipments );
 
     // create students
-    // for(unsigned int id = 0; id < configs.numStudents; id += 1) {
-    //     studentList.push_back( new Student( prt, server, office, id, configs.maxPurchases ) );
-    // }
+    for(unsigned int id = 0; id < configs.numStudents; id += 1) {
+        studentList.push_back( new Student( prt, server, office, id, configs.maxPurchases ) );
+    }
 
     // do stuff
-    WATCard::FWATCard fwatcard = office.create( 1, 5 );
-    cout << "balance " << fwatcard()->getBalance() << endl;
-    delete fwatcard;
     
     // clean up memory
     
     // clean up memory
 
-    // for(unsigned int i = 0; i < configs.numStudents; i += 1) {
-    //     delete studentList[i];
-    // }
+    for(unsigned int i = 0; i < configs.numStudents; i += 1) {
+        delete studentList[i];
+    }
 
     // delete bottling plant before vending machines
     delete plant;
@@ -133,3 +130,7 @@ void uMain::main() {
 
     // bank.withdraw(0, 5);
     // bank.withdraw(1, 8);
+
+    // WATCard::FWATCard fwatcard = office.create( 1, 5 );
+    // cout << "balance " << fwatcard()->getBalance() << endl;
+    // delete fwatcard;
