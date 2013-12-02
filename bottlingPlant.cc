@@ -2,6 +2,7 @@
 #include "printer.h"
 #include "truck.h"
 
+#include <iostream>
 
 BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int numVendingMachines,
                  unsigned int maxShippedPerFlavour, unsigned int maxStockPerFlavour,
@@ -11,7 +12,7 @@ BottlingPlant::BottlingPlant( Printer &prt, NameServer &nameServer, unsigned int
 
     closingDown = false;
 
-	for(int i = 0; i < 4; i += 1) {
+	for(int i = 0; i < 5; i += 1) {
 		inventory[i] = 0;
 	}
 	prt.print( Printer::BottlingPlant, 'S' );
@@ -24,6 +25,7 @@ BottlingPlant::~BottlingPlant() {
 }
 
 void BottlingPlant::main() {
+
 	for(;;) {
 		_Accept( ~BottlingPlant ) {
 			closingDown = true;
@@ -44,10 +46,13 @@ void BottlingPlant::produceSoda() {
 	unsigned int totalBottles = 0;
 
 	for(int i = 0; i < 4; i += 1) {
+		// generate random production
 		unsigned int bottles = randGen( maxShipped );
-		inventory[i] += bottles;
+
+		inventory[i] = bottles;
 		totalBottles += bottles;
 	}
+	inventory[4] = totalBottles;
 	prt->print( Printer::BottlingPlant, 'G', totalBottles );
 }
 
@@ -56,6 +61,10 @@ bool BottlingPlant::getShipment( unsigned int cargo[] ) {
 
 	prt->print( Printer::BottlingPlant, 'P' );
 
-	std::copy( inventory, inventory + 4, cargo );
+	// copy production run into truck
+	std::copy( inventory, inventory + 5, cargo );
+	// for (int i = 0; i < 5; i +=1) {
+	// 	cargo[i] = inventory[i];
+	// }
 	return false;
 }

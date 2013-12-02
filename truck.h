@@ -15,7 +15,7 @@ _Task Truck {
 
 	unsigned int numVMs;
 	unsigned int maxStock;
-	unsigned int deliveryStock[4];
+	unsigned int deliveryStock[5];
 	VendingMachine **VMs;
 
     void restock( int stockRemaining );

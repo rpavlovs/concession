@@ -19,7 +19,7 @@ _Task BottlingPlant {
 	unsigned int maxStock;
 	unsigned int timeBetweenShipments;
 	bool closingDown;
-	unsigned int inventory[4];
+	unsigned int inventory[5];
 
 	void produceSoda();
     void main();
