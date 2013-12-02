@@ -28,7 +28,7 @@ Student::main() {
 				st = machine->buy( favFlavour, *fwatcard() );
 
 				if ( st == VendingMachine::FUNDS ) {
-					fwatcard()->deposit( machine->cost() + 5 );
+					fwatcard = cardOffice->transfer( id, machine->cost() + 5, fwatcard() );
 				}
 				if ( st == VendingMachine::STOCK ) {
 					machine = nameServer->getMachine( id );
