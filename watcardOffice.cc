@@ -38,7 +38,7 @@ void WATCardOffice::main() {
 //			std::cout << "wake up couriers" << std::endl;
 			// wake up couriers so that they finish
 			for (unsigned int id = 0; id < numCouriers; id += 1) {
-//				std::cout << "signal " << id << std::endl;
+				std::cout << "signal " << id << std::endl;
 				workAvailable.signalBlock();
 			}
 			break;
@@ -115,15 +115,17 @@ void WATCardOffice::Courier::main() {
 			job->result.exception( new Lost );
 			prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
 			delete job->card;
-			return;
+			delete job;
+		}
+		else {
+//			std::cout << "delivering" << std::endl;
+			job->result.delivery( job->card );
+			prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
+
+//			std::cout << "deleting" << std::endl;
+			delete job;			
 		}
 
-//		std::cout << "delivering" << std::endl;
-		job->result.delivery( job->card );
-		prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
-
-//		std::cout << "deleting" << std::endl;
-		delete job;
 	}
 	prt->print( Printer::Courier, id, 'F' );
 }
