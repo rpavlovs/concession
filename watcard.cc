@@ -4,14 +4,6 @@ WATCard::WATCard() {
 	balance = 0;
 }
 
-WATCard::WATCard( const WATCard & ) {
-
-}
-
-WATCard& WATCard::operator=( const WATCard & ) {
-
-}
-
 void WATCard::deposit( unsigned int amount ) {
 	balance += amount;
 }
