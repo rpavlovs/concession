@@ -18,6 +18,7 @@ Student::Student( Printer &prt, NameServer &nameServer, WATCardOffice &cardOffic
 
 Student::~Student() {
 	prt->print( Printer::Student, id, 'F' );
+	delete fwatcard;
 }
 
 void
