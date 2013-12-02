@@ -1,10 +1,13 @@
 #ifndef __STUDENT_H__
 #define __STUDENT_H__
 
+#include "MPRNG.h"
 #include "printer.h"
 #include "nameServer.h"
 #include "watcard.h"
 #include "watcardOffice.h"
+
+extern MPRNG randGen;
 
 _Task Student {
 	Printer *prt;
