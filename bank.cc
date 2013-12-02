@@ -1,5 +1,7 @@
 #include "bank.h"
 
+#include <iostream>
+
 using namespace std;
 
 Bank::Bank( unsigned int numStudents ) : numStudents(numStudents) {
@@ -33,9 +35,11 @@ void Bank::withdraw( unsigned int id, unsigned int amount ) {
 	if ( id > balances.size() ) { return; }
 
 	if ( amount > balances[id] ) {
+//		std::cout << "waiting for funds" << std::endl;
 		// wait for enough money to be deposited
 		conditions[id]->wait( amount );
 	}
 
+//	std::cout << "withdrawing" << std::endl;
 	balances[id] -= amount;
 }
