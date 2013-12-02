@@ -95,6 +95,7 @@ void WATCardOffice::Courier::main() {
 		// card is lost
 		if ( randGen(1,6) == 4 ) {
 			job->result.exception( new Lost );
+			prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
 			delete job->card;
 			return;
 		}
