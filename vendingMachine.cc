@@ -33,6 +33,7 @@ VendingMachine::buy( Flavours flavour, WATCard &card ) {
 	if ( card.getBalance() < sodaCost )	{ return FUNDS; }
 
 	prt->print( Printer::Vending, id, 'B', flavour, sodaInventory[flavour] );
+	sodaInventory[flavour]--;
 	card.withdraw(sodaCost);
 	return BUY;	
 }

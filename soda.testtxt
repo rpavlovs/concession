@@ -1,19 +1,19 @@
 TEST DOCUMENTATION
 ==================
-The program performs a simulation of a complex system of WATCola soda pop
-production, distribution and consumption on campus.
+The program performs a simulation of a complex system of WATCola soda pop production, distribution and consumption on
+campus.
 
 USER INTERFACE TESTING
-    There is no user interface to be tested, so the testing focuses
-    solely on the simulation for the set of starting configurations.
+    There is no user interface to be tested, so the testing focuses solely on the simulation for the set of starting
+    configurations.
 
 SIMULATION TESTING
 
   TEST 1:
   -------
     DATA DESCRIPTION
-    The abstract picture of the simulation includes 5 entities that always
-    have only one instance and 3 objects that have at least one instance.
+    The abstract picture of the simulation includes 5 entities that always have only one instance, and 3 entities that
+    have at least one instance.
 
     Contents of "soda.config.t1" file:
       1 SodaCost                1
@@ -26,375 +26,446 @@ SIMULATION TESTING
       8 ParentalDelay           2
       9 NumCouriers             1
 
-    This configuratoin suggests minimal amount of objects, which interaction
-    is simulated (one student, one vending machine and one courier), and
-    minimal amount of intermal iterations for every object (only one purchase
-    per student, low time between shipments and low soda price). This sould
-    indicate whether the basic interactions between objects work correctly.
+    This configuratoin suggests minimal amount of objects, which interaction is simulated (one student, one vending
+    machine and one courier), and minimal amount of intermal iterations for every object (only one purchase per student,
+    low time between shipments and low soda price). This sould indicate whether the basic interactions between objects
+    work correctly.
 
     TESTING
-    Here is the script-fixed log of the testing performed with line numbers
-    attached.
+    Here is the script-fixed log of the testing performed with line numbers attached.
 
      1  Parent  WATOff  Names   Truck   Plant   Stud0   Mach0   Cour0
      2  ******* ******* ******* ******* ******* ******* ******* *******
      3  S       S       S                                       S
-     4  D0,3            R0      S       S       S0,1    S1         
-     5  D0,3            N0,0            G10     V0                 
-     6                          P10     P                          
-     7                          d0,10                   r          
-     8                          U0,10                           t0,5
-     9  D0,2                    D0,0    G10             R       T0,5
-    10  D0,1                                    B4      B0,3       
+     4  D0,2    C0,5    R0      S       S       S2,1    S1         
+     5  D0,1    W       N0,0            G3      V0              t0,5
+     6  D0,2                                                    T0,5
+     7  D0,2            N0,0    P3      P       V0                 
+     8  D0,2                    d0,3                    r          
+     9  D0,3                    U0,17   G6              R          
+    10  D0,2                    D0,0            B4      B2,2       
     11  ...     ...     ...     ...     ...     F       ...     ...
-    12  D0,1                    P10     P                          
-    13                          d0,10                   r          
-    14  D0,1                    U0,3                    R          
-    15  D0,2                    D0,3                               
-    16  D0,3                                                       
-    17  D0,3                                                       
-    18  D0,2                                                       
-    19  ...     ...     ...     F       ...     ...     ...     ...
-    20  ...     ...     ...     ...     F       ...     ...     ...
+    12  D0,3                                                       
+    13  D0,3                    P6      P                          
+    14                          d0,6                    r          
+    15  D0,3                    U0,11                   R          
+    16  D0,1                    D0,0                               
+    17  ...     ...     ...     F       ...     ...     ...     ...
+    18  ...     ...     ...     ...     F       ...     ...     ...
+    19  D0,2                                                       
+    20  ...     ...     ...     ...     ...     ...     F       ...
     21  D0,3                                                       
-    22  ...     ...     ...     ...     ...     ...     F       ...
-    23  D0,2                                                       
-    24  D0,3                                                       
-    25  F       ...     ...     ...     ...     ...     ...     ...
-    26  ...     ...     F       ...     ...     ...     ...     ...
-    27  ...     ...     ...     ...     ...     ...     ...     F
-    28  ...     F       ...     ...     ...     ...     ...     ...
-    29  ***********************
-
-    ANALYSIS
-    The results from running the program on "soda.config.t1" show that:
-    1)  All objects start and end correctly.
-    2)  Interaction between objects is done in a way specified in the
-        assinment. 
-    3)  Config file is read correctly.
-    4)  Printing format satisfies assignmnet specification.
-
-    From this we can say that each objects basic functionality is implemented
-    correctly. Printer and config reader is implemented correctly.
-
-  TEST 1:
-  -------
-    DATA DESCRIPTION
-    The abstract picture of the simulation includes 5 entities that always
-    have only one instance and 3 objects that have at least one instance.
-
-    Contents of "soda.config.t1" file:
-      1 SodaCost                1
-      2 NumStudents             1
-      3 MaxPurchases            1
-      4 NumVendingMachines      1
-      5 MaxStockPerFlavour      5
-      6 MaxShippedPerFlavour    3
-      7 TimeBetweenShipments    1
-      8 ParentalDelay           2
-      9 NumCouriers             1
-
-    This configuratoin suggests minimal amount of objects, which interaction
-    is simulated (one student, one vending machine and one courier), and
-    minimal amount of intermal iterations for every object (only one purchase
-    per student, low time between shipments and low soda price). This sould
-    indicate whether the basic interactions between objects work correctly.
-
-    TESTING
-    Here is the script-fixed log of the testing performed with line numbers
-    attached.
-
-     1  Parent  WATOff  Names   Truck   Plant   Stud0   Mach0   Cour0
-     2  ******* ******* ******* ******* ******* ******* ******* *******
-     3  S       S       S                                       S
-     4  D0,1            R0      S       S       S3,1    S1         
-     5  D0,3            N0,0            G4      V0              t0,5
-     6                          P4      P                          
-     7                          d0,4                    r          
-     8  D0,3                    U0,16   G7              R       T0,5
-     9  D0,1                    D0,0                               
-    10  D0,1                    P7      P                          
-    11                          d0,7                    r          
-    12  D0,1                    U0,9    G5              R          
-    13  D0,3                    D0,0    P       L                  
-    14                          P5                                 
-    15                          d0,5                    r          
-    16  D0,2                    U0,6                            t0,5
-    17  D0,2                    D0,2    G9              R       T0,5
-    18                                          B4      B3,2       
-    19  ...     ...     ...     ...     ...     F       ...     ...
-    20  D0,2                                                       
-    21  D0,1                                                       
     22  D0,2                                                       
-    23  D0,3                    P9      P                          
-    24                          d0,9                    r          
-    25  D0,1                    U0,1                    R          
-    26  D0,3                    D0,4                               
-    27  D0,2                                                       
-    28  ...     ...     ...     F       ...     ...     ...     ...
-    29  ...     ...     ...     ...     F       ...     ...     ...
-    30  D0,1                                                       
-    31  ...     ...     ...     ...     ...     ...     F       ...
-    32  D0,3                                                       
-    33  D0,2                                                       
-    34  F       ...     ...     ...     ...     ...     ...     ...
-    35  ...     ...     F       ...     ...     ...     ...     ...
-    36  ...     ...     ...     ...     ...     ...     ...     F
-    37  ...     F       ...     ...     ...     ...     ...     ...
-    38  ***********************
-
-
+    23  F       ...     ...     ...     ...     ...     ...     ...
+    24  ...     ...     F       ...     ...     ...     ...     ...
+    25  ...     ...     ...     ...     ...     ...     ...     F
+    26  ...     F       ...     ...     ...     ...     ...     ...
+    27  ***********************
 
     ANALYSIS
     The results from running the program on "soda.config.t1" show that:
     1)  All objects start and end correctly.
-    2)  Interaction between objects is done in a way specified in the
-        assinment. 
+    2)  Interaction between objects is done in a way specified in the assinment. 
     3)  Config file is read correctly.
     4)  Printing format satisfies assignmnet specification.
 
-    From this we can say that each objects basic functionality is implemented
-    correctly. Printer and config reader is implemented correctly.
-
-
-TEST 2:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      1
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             1
-
-TEST 3:
-
-config:
-
-SodaCost                2
-NumStudents             1
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             1
-
-TEST 4:
-
-config:
-
-SodaCost                2
-NumStudents             1
-MaxPurchases            8
-NumVendingMachines      1
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 5:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 6:
-
-config:
-
-SodaCost                1
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 7:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            1
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 8:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      1
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 9:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    1
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             5
-
-TEST 10:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    1
-ParentalDelay           2
-NumCouriers             5
-
-TEST 11:
-
-config:
-
-SodaCost                2
-NumStudents             5
-MaxPurchases            8
-NumVendingMachines      5
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           1
-NumCouriers             5
-
-TEST 12:
-
-config:
-
-SodaCost                2
-NumStudents             1
-MaxPurchases            8
-NumVendingMachines      1
-MaxStockPerFlavour      5
-MaxShippedPerFlavour    3
-TimeBetweenShipments    3
-ParentalDelay           2
-NumCouriers             1
-
-  TEST 1:
-  -------
-    DATA DESCRIPTION
-    The first input file used (as a re-direction of standard input), is
-    "data1.in".  The contents of the file, with each line numbered, are:
-
-         1  abcdefghijklmnopqrstuvwxyz
-         2  ABCDEFGHIJKLMNOPQRSTUVWXYZ
-         3       4% ^7890)
-         4  
-         5  This is a short text piece.
-
-    Line 1 is used to verify that each lower case alphabetic character is 
-    recognized and converted correctly.  Line 2 verifies that each upper
-    case alphabetic character is converted correctly.  Lines 3 and 4
-    verify that non-alphabetic characters, including tabs, spaces, and 
-    carriage returns, are left undisturbed.  Line 5 tests a mixture of
-    upper and lower case characters, the actual choices of which are
-    random.
-
-    TESTING
-    Here is the script-fixed log of the testing performed with line numbers
-    attached.
-
-       1 Script started on Thu Sep 15 10:54:20 1994
-       2 cs343_ctkierst@cayley[1]% cat data1.in
-       3 abcdefghijklmnopqrstuvwxyz
-       4 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-       5      4% ^7890)
-       6 
-       7 This is a short text piece.
-       8 cs343_ctkierst@cayley[2]% ./test < data1.in
-       9 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-      10 abcdefghijklmnopqrstuvwxyz
-      11      4% ^7890)
-      12 
-      13 tHIS IS A SHORT TEXT PIECE.
-      14 cs343_ctkierst@cayley[5]% exit
-      15 exit
-      16
-      17 script done on Thu Sep 15 10:54:46 1994
-
-    ANALYSIS
-    The results from running the program on "data1.in" show that:
-    1)  All lower case characters are correctly recognized and converted.
-        This is shown by the transformation of the contents of line 3 to 
-        the results shown in line 9 as well the change in line 7 to what is
-        shown in line 13. 
-    2)  All upper case characters are correctly recognized and converted.
-        This is shown by the transformation of the contents of line 4 to 
-        the results shown in line 10 as well the change in line 7 to what is
-        shown in line 13. 
-    3)  All other characters are left untouched shown by the lack of change
-        of the contents of lines 5 and 6 in lines 11 and 12. 
-    4)  A mixture of upper and lower case alphabetic characters are
-        correctly converted.  This is shown by the transformation of line
-        7 to the results shown in line 13.
-
-    The test for isupper(ch) has been verified by the data on lines 4 and 7.
-    The test for islower(ch) has been verified by the data on lines 3, 7, and 9.
-    The default case of being neither an upper nor a lower case character has
-    been verified by the data on lines 5 and 6.
-
-    From this we can say that each condition in the main loop has been
-    exercised, and the basic conversion algorithm has been shown to be correct.
+    From this we can say that each object's basic functionality is implemented correctly. Printer and config reader is
+    implemented correctly.
 
   TEST 2:
   -------
     DATA DESCRIPTION
-    "data2.in", is an empty input file.  It is used to verify that the end 
-    of file is detected correctly, and no extraneous output is generated.
+
+    Contents of "soda.config.t2" file:
+      1 SodaCost                1
+      2 NumStudents             3
+      3 MaxPurchases            1
+      4 NumVendingMachines      1
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    1
+      8 ParentalDelay           2
+      9 NumCouriers             1
+
+    This configuratoin test simulation correctness for multiple students.
 
     TESTING
-    Here is the script-fixed log of the testing performed.
+    Here is the script-fixed log of the testing performed with line numbers attached.
 
-       1 Script started on Thu Sep 15 11:13:01 1994
-       2 cs343_ctkierst@cayley[3]% cat data2.in
-       3 cs343_ctkierst@cayley[4]% ./test < data2.in
-       4 cs343_ctkierst@cayley[5]% exit
-       5 exit
-       6
-       7 script done on Thu Sep 15 11:13:33 1994
+     1  Parent  WATOff  Names   Truck   Plant   Stud0   Stud1   Stud2   Mach0   Cour0
+     2  ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+     3  S       S       S                                                       S
+     4  D0,1    C0,5    R0      S       S       S2,1                    S1         
+     5  D2,3    W       N0,0            G10     V0                              t0,5
+     6  D0,1    C1,5    N1,0                            S1,1                       
+     7  D2,3    C2,5    N2,0                            V0      S2,1               
+     8                          P10     P                       V0                 
+     9                          d0,10                                   r          
+    10  D2,2                    U0,10   G10                             R          
+    11  D1,2                    D0,0                                               
+    12  D1,3                                                                       
+    13  D0,3                                                            B2,3    T0,5
+    14  D2,2    W                                                               t1,5
+    15                                          B4                              T1,5
+    16  ...     ...     ...     ...     ...     F       ...     ...     ...     ...
+    17  D1,1    W                                                       B1,3    t2,5
+    18                          P10     P                                       T2,5
+    19                          d0,10                                   r          
+    20                          U0,1                    B4                         
+    21  ...     ...     ...     ...     ...     ...     F       ...     ...     ...
+    22  D1,1                    D0,1    G4                              R          
+    23  D2,1                                                    B4      B2,5       
+    24  ...     ...     ...     ...     ...     ...     ...     F       ...     ...
+    25  D1,2                                                                       
+    26  D0,2                                                                       
+    27  D0,1                    P4      P                                          
+    28  D2,1                    d0,4                                    r          
+    29  D1,3                    D0,3                                    R          
+    30  D2,3                                                                       
+    31  D0,1                                                                       
+    32  ...     ...     ...     F       ...     ...     ...     ...     ...     ...
+    33  ...     ...     ...     ...     F       ...     ...     ...     ...     ...
+    34  D1,2                                                                       
+    35  ...     ...     ...     ...     ...     ...     ...     ...     F       ...
+    36  D2,2                                                                       
+    37  D2,3                                                                       
+    ...
+    42  ***********************
 
     ANALYSIS
-    Line 3 runs the program on "data2.in" and lines 4-5 show that the end-of-
-    file is correctly detected, and no extraneous output is generated.  Thus
-    the basic input processing algorithm is shown to be correct.
+    The results from running the program on "soda.config.t2" show that multiple students are being simulated correctly.
+
+  TEST 3:
+  -------
+    DATA DESCRIPTION
+
+    Contents of "soda.config.t3" file:
+      1 SodaCost                1
+      2 NumStudents             1
+      3 MaxPurchases            1
+      4 NumVendingMachines      3
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    1
+      8 ParentalDelay           2
+      9 NumCouriers             1
+
+    This configuratoin test simulation correctness for multiple vending machines.
+
+    TESTING
+    Here is the script-fixed log of the testing performed with line numbers attached.
+
+     1  Parent  WATOff  Names   Truck   Plant   Stud0   Mach0   Mach1   Mach2   Cour0
+     2  ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+     3  S       S       S                                                       S
+     4                  R0                              S1                         
+     5                  R1                                      S1                 
+     6  D0,2    C0,5    R2      S       S       S2,1                    S1         
+     7  D0,1    W       N0,0            G5      V0                              t0,5
+     8  D0,1                                                                       
+     9  D0,3                    P5      P                                       T0,5
+    10                          d0,5                    r                          
+    11  D0,2                    U0,15   G7              R                          
+    12  D0,2                    D0,0            B4      B2,3                       
+    13  ...     ...     ...     ...     ...     F       ...     ...     ...     ...
+    14  D0,2                    P7      P                                          
+    15                          d0,7                    r                          
+    16  D0,2                    U0,8                    R                          
+    17  D0,2                    D0,0                                               
+    18  D0,3                                                                       
+    19  D0,1                                                                       
+    20  ...     ...     ...     F       ...     ...     ...     ...     ...     ...
+    21  ...     ...     ...     ...     F       ...     ...     ...     ...     ...
+    22  D0,2                                                                       
+    23  ...     ...     ...     ...     ...     ...     F       ...     ...     ...
+    24  D0,1                                                                       
+    25  ...     ...     ...     ...     ...     ...     ...     F       ...     ...
+    26  D0,2                                                                       
+    27  ...     ...     ...     ...     ...     ...     ...     ...     F       ...
+    28  D0,1                                                                       
+    29  D0,1                                                                       
+    ...
+    34  ***********************
+
+    ANALYSIS
+    The results from running the program on "soda.config.t3" show that multiple vending machines are being simulated
+    correctly.
+
+  TEST 4:
+  -------
+    DATA DESCRIPTION
+
+    Contents of "soda.config.t4" file:
+      1 SodaCost                1
+      2 NumStudents             1
+      3 MaxPurchases            1
+      4 NumVendingMachines      1
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    1
+      8 ParentalDelay           2
+      9 NumCouriers             3
+
+    This configuratoin test simulation correctness for multiple couriers.
+
+    TESTING
+    Here is the script-fixed log of the testing performed with line numbers attached.
+
+     1  Parent  WATOff  Names   Truck   Plant   Stud0   Mach0   Cour0   Cour1   Cour2
+     2  ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+     3  S       S       S                                       S       S       S
+     4  D0,3            R0      S       S               S1                         
+     5  D0,2                            G7                                         
+     6                          P7      P                                          
+     7                          d0,7                    r                          
+     8  D0,1                    U0,13   G7              R                          
+     9          C0,5    N0,0    D0,0            S0,1                               
+    10  D0,1    W                               V0              t0,5               
+    11  D0,1                                    B4      B0,2    T0,5               
+    12  ...     ...     ...     ...     ...     F       ...     ...     ...     ...
+    13  D0,2                    P7      P                                          
+    14                          d0,7                    r                          
+    15  D0,3                    U0,6                    R                          
+    16  D0,3                    D0,0                                               
+    17  ...     ...     ...     F       ...     ...     ...     ...     ...     ...
+    18  D0,2                                                                       
+    19  ...     ...     ...     ...     F       ...     ...     ...     ...     ...
+    20  D0,2                                                                       
+    21  ...     ...     ...     ...     ...     ...     F       ...     ...     ...
+    22  D0,3                                                                       
+    ...
+    29  ***********************
+
+    ANALYSIS
+    The results from running the program on "soda.config.t4" show that multiple couriers are being simulated correctly.
+
+  TEST 5:
+  -------
+    DATA DESCRIPTION
+
+    Contents of "soda.config.t5" file:
+      1 SodaCost                1
+      2 NumStudents             3
+      3 MaxPurchases            1
+      4 NumVendingMachines      3
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    1
+      8 ParentalDelay           2
+      9 NumCouriers             3
+
+    This configuratoin test simulation correctness for multiple couriers, students and vending machines.
+
+    TESTING
+    Here is the script-fixed log of the testing performed with line numbers attached.
+
+     1  Parent  WATOff  Names   Truck   Plant   Stud0   Stud1   Stud2   Mach0   Mach1   Mach2   Cour0   Cour1   Cour2
+     2  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+     3  S       S       S                                                                       S       S       S
+     4                  R0                                              S1                                         
+     5                  R1                                                      S1                                 
+     6  D0,3            R2      S       S                                               S1                         
+     7  D1,1                            G5                                                                         
+     8  D2,2    C0,5    N0,0                    S2,1                                                               
+     9  D2,2    W                               V0                                              t0,5               
+    10  D0,3    C1,5    N1,1                            S0,1                                    T0,5               
+    11  D1,2            N0,1                    V1      V1                                                         
+    12                  N0,2                    V2                                                                 
+    13                  N0,0    P5      P       V0                                                                 
+    14  D2,1    W               d0,5                                    r                               t1,5       
+    15  D2,3                    U0,15   G8                              R                                          
+    16          C2,5    N2,2    D0,0                            S1,1                                               
+    17  D1,2                                    B4              V2      B2,1                                       
+    18  ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...
+    19          W                                                                                       T1,5    t2,5
+    20  D1,1                    P8      P                                                                       T2,5
+    21                          d0,8                                    r                                          
+    22  D2,2            N1,2    U0,7                    V2      L                                                  
+    23  D0,1            N1,0    D0,0    G0              V0              R                                          
+    24                                                  B4              B0,3                                       
+    25  ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...
+    26  D2,3    C2,5                                                                                               
+    27          W                                                                               t2,5               
+    28  D0,2            N2,0                                    V0                              T2,5               
+    29  D2,2                                                    B4      B1,3                                       
+    30  ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...
+    31  D1,3                    P0      P                                                                          
+    32  D2,1                                                                                                       
+    33  D1,2                                                                                                       
+    34  ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...     ...     ...
+    35  D2,3                                                                                                       
+    36  ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...     ...
+    37  D2,2                                                                                                       
+    38  ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...
+    39  D0,2                                                                                                       
+    40  ...     ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...
+    41  D0,3                                                                                                       
+    42  ...     ...     ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...
+    43  D2,3                                                                                                       
+    ...
+    50  ***********************
+
+    ANALYSIS
+    The results from running the program on "soda.config.t5" show that multiple couriers, students and vending machines
+    interact with each other correctly with minimal internal work.
+
+  TEST 6:
+  -------
+    DATA DESCRIPTION
+
+    Contents of "soda.config.t5" file:
+      1 SodaCost                2
+      2 NumStudents             3
+      3 MaxPurchases            8
+      4 NumVendingMachines      3
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    3
+      8 ParentalDelay           2
+      9 NumCouriers             3
+
+    This configuratoin test simulation correctness for multiple couriers, students and vending machines with non
+    minimal internal work.
+
+    TESTING
+    Here is the script-fixed log of the testing performed with line numbers attached.
+
+     1  Parent  WATOff  Names   Truck   Plant   Stud0   Stud1   Stud2   Mach0   Mach1   Mach2   Cour0   Cour1   Cour2
+     2  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+     3  S       S       S                                                                       S       S       S
+     4                  R0                                              S2                                         
+     5                  R1                                                      S2                                 
+     6  D0,2            R2      S       S                                               S2                         
+     7  D2,2                            G5                                                                         
+     8  D1,3                    P5      P                                                                          
+     9                          d0,5                                    r                                          
+    10          C0,5    N0,0    U0,15           S2,3                                                               
+    11  D0,2    W               D0,0            V0                      R                       t0,5               
+    12  D0,2    C1,5    N1,1            G9              S3,4                                    T0,5               
+    13  D2,3    W       N0,1                    V1      V1                                              t1,5       
+    14                  N0,2                    V2                                                                 
+    15  D0,1            N0,0                    V0                                                                 
+    16                  N0,1                    V1                                                                 
+    17                  N0,2                    V2                                                                 
+    18                  N0,0    P9      P       V0                                                                 
+    19  D1,2    C2,5    N2,2    d0,9                            S2,1                                    T1,5       
+    20  D1,3    W               U0,7                            V2      r                                       t2,5
+    21                          D0,1                            L       R                                       T2,5
+    22                          d1,1                                            r                                  
+    23  D2,3            N0,1    U1,19   G9      V1                              R                                  
+    24  D2,1            N1,2    D1,0                    V2                                                         
+    25                  N1,0                            V0              B3,4                                       
+    26  D0,1    C2,5    N0,2                    V2      B3                                                         
+    27                  N0,0                    V0                                                                 
+    28  D2,1    W       N0,1                    V1                                              t2,5               
+    29                  N0,2                    V2                                              T2,5               
+    30                  N0,0    P9      P       V0      B1              B3,4                                       
+    31  D1,1            N2,0    d0,9                            V0      r                                          
+    32  D0,2                    U0,4                                    R                                          
+    33                          D0,6                                                                               
+    34                          d1,6                                            r                                  
+    35  D1,1                    U1,13   G7      B3                      B2,1    R                                  
+    36  D1,1                    D1,0                            B3      B2,1                                       
+    37  ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...
+    38  D0,1                    P7      P                                                                          
+    39  D0,2    T1,7            d0,7                                    r                                          
+    40  D1,3    W               U0,1    G4                                                              t1,7       
+    41                          D0,4                                    R                               T1,7       
+    42                          d1,4                                            r                                  
+    43  D2,1                    U1,11           B1                      B2,4    R                                  
+    44                          D1,2                                                                               
+    45                          d2,2                                                    r                          
+    46  D2,1                    U2,18                   B6              B3,5            R                          
+    47  D1,3    T0,7            D2,0                                                                               
+    48  D0,3                                            B4              B3,5                                       
+    49  ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...
+    50          W                                                                                               t0,7
+    51                          P4      P                                                                       T0,7
+    52  D0,1                    d0,4                                    r                                          
+    53  D1,1                    U0,1                                    R                                          
+    54                          D0,4                                                                               
+    55                          d1,4                                            r                                  
+    56  D2,2                    U1,8    G7      B6                      B2,4                                       
+    57  ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...
+    58                          D1,1                                            R                                  
+    59                          d2,1                                                    r                          
+    60  D0,2                    U2,17                                                   R                          
+    61  D2,2                    D2,0                                                                               
+    62  D1,3                                                                                                       
+    63  D2,3                                                                                                       
+    64  D1,2                    P7      P                                                                          
+    65  D1,2                    d0,7                                    r                                          
+    66                          D0,6                                    R                                          
+    67                          d1,6                                            r                                  
+    68  D1,3                    U1,5                                            R                                  
+    69                          D1,3                                                                               
+    70                          d2,3                                                    r                          
+    71  D0,1                    U2,14                                                   R                          
+    72  D2,1                    D2,0                                                                               
+    73  D0,1                                                                                                       
+    74  D1,2                                                                                                       
+    75  D2,2                                                                                                       
+    76  D1,1                                                                                                       
+    77  ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...     ...     ...
+    78  ...     ...     ...     ...     F       ...     ...     ...     ...     ...     ...     ...     ...     ...
+    79  D1,3                                                                                                       
+    80  ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...     ...
+    81  D0,2                                                                                                       
+    82  ...     ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...     ...
+    83  D0,3                                                                                                       
+    84  ...     ...     ...     ...     ...     ...     ...     ...     ...     ...     F       ...     ...     ...
+    85  D2,1                                                                                                       
+    86  D1,3                                                                                                       
+    ...
+    93  ***********************
+
+    ANALYSIS
+    The results from running the program on "soda.config.t5" show that multiple couriers, students and vending machines
+    interact with each other correctly with minimal internal work.
+
+  TEST 7:
+  -------
+    DATA DESCRIPTION
+
+    Seed "1" is used and the program is being run multiple times and output compared to the program output run with
+    seed "2". Runs with incorrect number of argumetns and incorrect values for the seed.
+
+    Contents of "soda.config.t6" file:
+      1 SodaCost                2
+      2 NumStudents             3
+      3 MaxPurchases            8
+      4 NumVendingMachines      3
+      5 MaxStockPerFlavour      5
+      6 MaxShippedPerFlavour    3
+      7 TimeBetweenShipments    3
+      8 ParentalDelay           2
+      9 NumCouriers             3
+
+    This configuratoin test random generator use for correctness. Output is supposed to the same for most of the
+    program runs.
+
+    TESTING
+    Here is the script-fixed log of the testing performed with line numbers
+    attached.
+
+      1  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1
+      2  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1.second_run
+      3  linux032:~/cs343/cs343_a6> diff t6_1 t6_1.second_run 
+      4  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1
+      5  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1.second_run
+      6  linux032:~/cs343/cs343_a6> diff t6_1 t6_1.second_run
+      7  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1
+      8  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1.second_run
+      9  linux032:~/cs343/cs343_a6> diff t6_1 t6_1.second_run
+     10  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 1 > t6_1
+     11  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 2 > t6_2
+     12  ... (diff outout shows lots of differences between t6_1 and t6_2) ...
+     13  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 qwerqwer qwerqwer
+     14  Usage: soda [config-file] [seed > 0]
+     15  linux032:~/cs343/cs343_a6> ./soda soda.config.t6 0
+     16  Usage: soda [config-file] [seed > 0]
+
+
+    ANALYSIS
+    The results from running the program on "soda.config.t6" multiple times with different seeds shows that the seed is
+    used correctly. Argument checking is handled correctly. Usage message is printed in appropriate situations.
