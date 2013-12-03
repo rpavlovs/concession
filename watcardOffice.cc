@@ -55,6 +55,7 @@ void WATCardOffice::main() {
 
 WATCard::FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount ) {
 //	std::cout << "create watcard sid: " << sid << " amount: " << amount << std::endl;
+	prt->print( Printer::WATCardOffice, 'C',  sid, amount);
 	WATCard *card = new WATCard();
 	Job *job = new Job( sid, card, amount );
 	jobsList.push( job );
@@ -63,6 +64,7 @@ WATCard::FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount )
 
 WATCard::FWATCard WATCardOffice::transfer( unsigned int sid, unsigned int amount, WATCard *card ) {
 //	std::cout << "transfer funds sid: " << sid << " amount: " << amount << std::endl;
+	prt->print( Printer::WATCardOffice, 'T',  sid, amount);
 	Job *job = new Job( sid, card, amount );
 	jobsList.push( job );
 	return job->result;
@@ -82,6 +84,7 @@ WATCardOffice::Job * WATCardOffice::requestWork() {
 	WATCardOffice::Job * job = jobsList.front();
 //	std::cout << "job ready job: " << job->studentId << std::endl;
 			jobsList.pop();
+	prt->print( Printer::WATCardOffice, 'W' );
 	return job;
 }
 
@@ -115,15 +118,17 @@ void WATCardOffice::Courier::main() {
 			job->result.exception( new Lost );
 			prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
 			delete job->card;
-			return;
+			delete job;
+		}
+		else {
+//			std::cout << "delivering" << std::endl;
+			job->result.delivery( job->card );
+			prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
+
+//			std::cout << "deleting" << std::endl;
+			delete job;			
 		}
 
-//		std::cout << "delivering" << std::endl;
-		job->result.delivery( job->card );
-		prt->print( Printer::Courier, id, 'T', job->studentId, job->amount );
-
-//		std::cout << "deleting" << std::endl;
-		delete job;
 	}
 	prt->print( Printer::Courier, id, 'F' );
 }
