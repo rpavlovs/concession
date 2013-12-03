@@ -31,6 +31,7 @@ Student::main() {
 				}
 				if ( st == VendingMachine::STOCK ) {
 					machine = nameServer->getMachine( id );
+					prt->print( Printer::Student, id, 'V', machine->getId() );
 				}
 				if ( st == VendingMachine::BUY ) break;
 			} catch( WATCardOffice::Lost ) {
